@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri Foto & Video</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .tabs button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            background: #333;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .tabs button.active {
+            background: #555;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            padding: 10px;
+        }
+        .gallery img, .gallery video {
+            width: 100%;
+            border-radius: 5px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Galeri Foto & Video</h1>
+        <div class="tabs">
+            <button onclick="showGallery('photoGallery')" class="active">Album Foto</button>
+            <button onclick="showGallery('videoGallery')">Album Video</button>
+        </div>
+        
+        <div id="photoGallery" class="gallery"></div>
+        <div id="videoGallery" class="gallery hidden"></div>
+    </div>
+
+    <script>
+        function showGallery(id) {
+            document.getElementById("photoGallery").classList.add("hidden");
+            document.getElementById("videoGallery").classList.add("hidden");
+
+            document.getElementById(id).classList.remove("hidden");
+
+            // Highlight the active button
+            document.querySelectorAll(".tabs button").forEach(button => button.classList.remove("active"));
+            document.querySelector(`.tabs button[onclick="showGallery('${id}')"]`).classList.add("active");
+        }
+
+        function loadGallery(folder, elementId, fileList) {
+            const gallery = document.getElementById(elementId);
+            fileList.forEach(file => {
+                let item;
+                if (folder === 'foto') {
+                    item = document.createElement('img');
+                    item.src = `${folder}/${file}`;
+                    item.alt = "Foto Galeri";
+                } else if (folder === 'video') {
+                    item = document.createElement('video');
+                    item.controls = true;
+                    let source = document.createElement('source');
+                    source.src = `${folder}/${file}`;
+                    source.type = "video/mp4";
+                    item.appendChild(source);
+                }
+                gallery.appendChild(item);
+            });
+        }
+
+        // Daftar file foto & video (sesuaikan dengan file yang ada di folder)
+        const fotoFiles = ["foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg"];
+        const videoFiles = ["video1.mp4", "video2.mp4"];
+
+        // Memuat galeri saat halaman terbuka
+        loadGallery('foto', 'photoGallery', fotoFiles);
+        loadGallery('video', 'videoGallery', videoFiles);
+    </script>
+</body>
+</html>

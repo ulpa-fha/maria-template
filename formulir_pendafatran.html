@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Pendaftaran Mahasiswa Baru</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1bd4b;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: rgb(237, 199, 238);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #070707;
+            border-radius: 5px;
+        }
+        button {
+            background: #28a745;
+            color: rgb(14, 13, 13);
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        <h2>Formulir Pendaftaran Mahasiswa Baru</h2>
+        <form id="studentRegistrationForm">
+            <input type="text" id="name" placeholder="Nama Lengkap" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="tel" id="phone" placeholder="Nomor HP" required>
+            <input type="text" id="birthplace" placeholder="Tempat Lahir" required>
+            <input type="date" id="birthdate" required>
+            <select id="program" required>
+                <option value="">Pilih Program Studi</option>
+                <option value="Teknik Informatika">Pendidikan Informatika</option>
+                <option value="Sistem Informasi">Sistem Informasi</option>
+                <option value="Manajemen">Manajemen</option>
+                <option value="Akuntansi">Akuntansi</option>
+                <option value="Akuntansi">Bahasa Inggris</option>
+                <option value="Akuntansi">Farmasi</option>
+                <option value="Akuntansi">Penjaskesrek</option>
+            </select>
+            <button type="submit">Daftar</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("studentRegistrationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
+            const birthplace = document.getElementById("birthplace").value;
+            const birthdate = document.getElementById("birthdate").value;
+            const program = document.getElementById("program").value;
+            
+            if (name && email && phone && birthplace && birthdate && program) {
+                alert("Pendaftaran Berhasil!\nNama: " + name + "\nEmail: " + email + "\nProgram Studi: " + program);
+            } else {
+                alert("Harap isi semua kolom!");
+            }
+        });
+    </script>
+</body>
+</html>
